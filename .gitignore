@@ -167,3 +167,4 @@ cython_debug/
 *.vsix
 
 artifacts
+catboost_info

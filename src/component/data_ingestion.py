@@ -8,6 +8,9 @@ from sklearn.model_selection import train_test_split
 from src.exception import CustomException
 from src.logger import logging
 
+from src.component.data_transformation import DataTransformation
+from src.component.model_trainer import ModelTrainer
+
 
 @dataclass
 class DataIngestionConfig:
@@ -56,4 +59,11 @@ class DataIngestion:
 if __name__ == "__main__":
     logging.info("Running data ingestion")
     obj = DataIngestion()
-    obj.initiate_data_ingestion()
+    train_data, test_data = obj.initiate_data_ingestion()
+
+    data_transform = DataTransformation()
+    train_arr, test_arr, _ = data_transform.initiate_data_transformation(
+        train_data, test_data)
+
+    model_trainer = ModelTrainer()
+    print(model_trainer.initiate_model_trainer(train_arr, test_arr))
